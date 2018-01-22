@@ -21,6 +21,18 @@ public class Main {
             absences.add(rand.nextInt(11));
         }
         System.out.println("The elements are: " + absences);
+
+        // Number of students with perfect attendance
+        int countPerf = 0;
+        for (int i = 0; i < absences.size(); i++)
+        {
+            if(absences.get(i) == 0)
+            {
+                countPerf++;
+            }
+        }
+        System.out.println("Students with perfect attendance: " + countPerf);
+
     }
 
 
