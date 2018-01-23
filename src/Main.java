@@ -37,6 +37,9 @@ public class Main {
         double avg = average(absences);
         System.out.println("The average of the absences is: " + avg);
 
+        // Calculate the percentage of students with 3 or less absences
+        double percentage = percentage(absences);
+        System.out.println("Percentage of students with 3 or less absences: " + percentage + "%");
 
     }
 
@@ -53,6 +56,19 @@ public class Main {
             sum+=absences.get(i);
         }
         return sum;
+    }
+
+    private static double percentage(ArrayList<Integer> absences)
+    {
+        int count = 0;
+        for (int i = 0; i < absences.size(); i++)
+        {
+            if(absences.get(i) <= 3)
+            {
+                count++;
+            }
+        }
+        return (double)count/absences.size();
     }
 
 
