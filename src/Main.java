@@ -41,13 +41,19 @@ public class Main {
         double percentage = percentage(absences);
         System.out.println("Percentage of students with 3 or less absences: " + percentage + "%");
 
+        // Find the index(es) of the students who had a specified number of absences
+        System.out.print("Enter a number to find the indexes of students with that amount of absences: ");
+        int num = sc.nextInt();
+        ArrayList ind = findIndexes(absences, num);
+        System.out.println("The indexes of students with " + num + " absences are: " + ind);
     }
-
+    // Function that calculates average
     private static double average(ArrayList<Integer> absences)
     {
         return (double)sum(absences)/absences.size();
     }
 
+    // Function that calculates sum
     private static int sum(ArrayList<Integer> absences)
     {
         int sum = 0;
@@ -58,6 +64,7 @@ public class Main {
         return sum;
     }
 
+    // Function that calculates percentage
     private static double percentage(ArrayList<Integer> absences)
     {
         int count = 0;
@@ -69,6 +76,20 @@ public class Main {
             }
         }
         return (double)count/absences.size();
+    }
+
+    // Function that finds the index(es) of the students who had a specified number of absences
+    private static ArrayList findIndexes(ArrayList<Integer> absences, int num)
+    {
+        ArrayList<Integer>indexes = new ArrayList<>();
+        for (int i = 0; i < absences.size(); i++)
+        {
+            if(absences.get(i) == num)
+            {
+                indexes.add(i);
+            }
+        }
+        return indexes;
     }
 
 
