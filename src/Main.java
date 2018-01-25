@@ -20,7 +20,7 @@ public class Main {
         {
             absences.add(rand.nextInt(11));
         }
-        System.out.println("The elements are: " + absences);
+        System.out.println("\nThe elements are: " + absences);
 
         // Number of students with perfect attendance
         int countPerf = 0;
@@ -42,10 +42,18 @@ public class Main {
         System.out.println("Percentage of students with 3 or less absences: " + percentage + "%");
 
         // Find the index(es) of the students who had a specified number of absences
-        System.out.print("Enter a number to find the indexes of students with that amount of absences: ");
+        System.out.print("\nEnter a number to find the indexes of students with that amount of absences: ");
         int num = sc.nextInt();
         ArrayList ind = findIndexes(absences, num);
         System.out.println("The indexes of students with " + num + " absences are: " + ind);
+
+        // Find the index(es) of the student(s) that FE'd the course
+        System.out.print("\nHow many times does this course meet a week? ");
+        // I know the variable has a bad name... need help
+        int meetFrequency = sc.nextInt();
+        int fe = meetFrequency * 2;
+        System.out.println("The indexes of students that FE'd are: " + findIndexesOfFE(absences, fe));
+
     }
     // Function that calculates average
     private static double average(ArrayList<Integer> absences)
@@ -91,6 +99,22 @@ public class Main {
         }
         return indexes;
     }
+
+    // Function that finds the index(es) of students who FE'd
+    // ASK ABOUT THIS, BASICALLY THE SAME FUNCTION EXCEPT ONE THING, A WAY TO KEEP ONLY ONE FUNCTION???
+    private static ArrayList findIndexesOfFE(ArrayList<Integer> absences, int num)
+    {
+        ArrayList<Integer>indexes = new ArrayList<>();
+        for (int i = 0; i < absences.size(); i++)
+        {
+            if(absences.get(i) > num)
+            {
+                indexes.add(i);
+            }
+        }
+        return indexes;
+    }
+
 
 
 
