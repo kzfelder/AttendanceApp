@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         System.out.println("\n\nHello, AttendanceApp!\n");
 
         // Welcome the user
@@ -21,6 +22,9 @@ public class Main {
             absences.add(rand.nextInt(11));
         }
         System.out.println("\nThe elements are: " + absences);
+        /*System.out.println("How many 3's: " + absences.stream().filter(p->p==3).count());
+        System.out.println("How many > 3: " + absences.stream().filter(p->p>3).count());
+        System.out.println("How many < 3: " + absences.stream().filter(p->p<3).count());*/
 
         // Number of students with perfect attendance
         int countPerf = 0;
@@ -31,15 +35,16 @@ public class Main {
                 countPerf++;
             }
         }
-        System.out.println("Students with perfect attendance: " + countPerf);
+        System.out.println("Amount of students with perfect attendance: " + countPerf);
 
         // Calculate the average of the absences
         double avg = average(absences);
-        System.out.println("The average of the absences is: " + avg);
+        System.out.println("The average of the absences: " + avg);
 
         // Calculate the percentage of students with 3 or less absences
-        double percentage = percentage(absences);
-        System.out.println("Percentage of students with 3 or less absences: " + percentage + "%");
+        int threeOrLess = countLessThan(absences,3);
+        double percentage = percentage(countPerf, threeOrLess);
+        System.out.println("Percentage of students with less than 3 absences that have perfect attendance: " + percentage + "%");
 
         // Find the index(es) of the students who had a specified number of absences
         System.out.print("\nEnter a number to find the indexes of students with that amount of absences: ");
@@ -52,7 +57,11 @@ public class Main {
         // I know the variable has a bad name... need help
         int meetFrequency = sc.nextInt();
         int fe = meetFrequency * 2;
-        System.out.println("The indexes of students that FE'd are: " + findIndexesOfFE(absences, fe));
+        ArrayList listOfFE = findIndexesOfFE(absences, fe);
+        // Find the percentage of students that FE'd
+        double FEPercentage = percentage(listOfFE.size(), absences.size());
+        System.out.println("The indexes of students that FE'd: " + listOfFE);
+        System.out.printf("The percentage of students that FE'd: %.2f%%", FEPercentage);
 
     }
     // Function that calculates average
@@ -73,17 +82,11 @@ public class Main {
     }
 
     // Function that calculates percentage
-    private static double percentage(ArrayList<Integer> absences)
+    private static double percentage(int num, int total)
     {
-        int count = 0;
-        for (int i = 0; i < absences.size(); i++)
-        {
-            if(absences.get(i) <= 3)
-            {
-                count++;
-            }
-        }
-        return (double)count/absences.size();
+        double fraction = (double)num/total;
+
+        return fraction*100;
     }
 
     // Function that finds the index(es) of the students who had a specified number of absences
@@ -98,6 +101,21 @@ public class Main {
             }
         }
         return indexes;
+    }
+
+    // Function that counts the amount of students that had less than or equal to a certain number of absences
+    private static int countLessThan(ArrayList<Integer> absences, int num)
+    {
+        int count = 0;
+        for (int i = 0; i < absences.size(); i++)
+        {
+            if(absences.get(i) < num)
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     // Function that finds the index(es) of students who FE'd
