@@ -63,7 +63,26 @@ public class Main {
         System.out.println("The indexes of students that FE'd: " + listOfFE);
         System.out.printf("The percentage of students that FE'd: %.2f%%", FEPercentage);
 
+        // Find the average of the non-FE'd absences
+        // HELP: function is too specific :-(
+        ArrayList<Integer> nonFE = createListOfNonFE(absences, fe);
+        System.out.println("\nThe average of non-FE'd absences: " + average(nonFE));
+
     }
+
+    private static ArrayList createListOfNonFE(ArrayList<Integer> absences, int fe)
+    {
+        ArrayList<Integer> nonFEAbsences = new ArrayList<>();
+        for (int i = 0; i <absences.size(); i++)
+        {
+            if (absences.get(i) < fe)
+            {
+                nonFEAbsences.add(absences.get(i));
+            }
+        }
+        return nonFEAbsences;
+    }
+
     // Function that calculates average
     private static double average(ArrayList<Integer> absences)
     {
@@ -103,7 +122,7 @@ public class Main {
         return indexes;
     }
 
-    // Function that counts the amount of students that had less than or equal to a certain number of absences
+    // Function that counts the amount of students that had less than a certain number of absences
     private static int countLessThan(ArrayList<Integer> absences, int num)
     {
         int count = 0;
