@@ -64,7 +64,7 @@ public class Main {
         System.out.printf("The percentage of students that FE'd: %.2f%%", FEPercentage);
 
         // Find the average of the non-FE'd absences
-        // HELP: function is too specific :-(
+        // HELP: function is too specific :-(, how can fix this?
         ArrayList<Integer> nonFE = createListOfNonFE(absences, fe);
         System.out.println("\nThe average of non-FE'd absences: " + average(nonFE));
 
