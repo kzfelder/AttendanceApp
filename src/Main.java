@@ -77,11 +77,21 @@ public class Main {
 
         // Sort the absences using a library function
         Collections.sort(absences);
-        System.out.println("\nSorted absences: " + absences);
+        System.out.println("Sorted absences: " + absences);
 
         // Shuffle absences with a user-defined shuffle
         shuffle(absences);
-        System.out.println("\nShuffled absences: " + absences);
+        System.out.println("Shuffled absences: " + absences);
+
+
+        // Create and output an ArrayList of 5 distinct names.
+        ArrayList<String> names = new ArrayList<>();
+        names.add("John");
+        names.add("Ralph");
+        names.add("Sam");
+        names.add("Hope");
+        names.add("Tammy");
+        System.out.println("\nNames: " + names);
 
     }
 
