@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -72,6 +73,11 @@ public class Main {
         // Which variables to use for this function? (x & y)
         changeListValues(absences, 7,5);
         System.out.println("\nThe new absences: " + absences);
+
+        // Sort the absences using a library function
+        Collections.sort(absences);
+        System.out.println("\nSorted absences: " + absences);
+
     }
 
     // Function to change the values (add or subtract in a list up to 15 or down to 0)
