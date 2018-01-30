@@ -68,8 +68,35 @@ public class Main {
         ArrayList<Integer> nonFE = createListOfNonFE(absences, fe);
         System.out.println("\nThe average of non-FE'd absences: " + average(nonFE));
 
+        // Change absences in a ArrayList
+        // Which variables to use for this function? (x & y)
+        changeListValues(absences, 7,5);
+        System.out.println("\nThe new absences: " + absences);
     }
 
+    // Function to change the values (add or subtract in a list up to 15 or down to 0)
+    private static void changeListValues(ArrayList<Integer> absences, int x, int y)
+    {
+        for (int i = 0; i < absences.size(); i++)
+        {
+            int element;
+            if(absences.get(i) > y)
+            {
+                element = absences.get(i) + x;
+                if(element > 15)
+                {
+                    element = 15;
+                }
+                else if(element < 0)
+                {
+                    element = 0;
+                }
+                absences.set(i, element);
+            }
+        }
+    }
+
+    // Function to create a list of absences that haven't FE'd
     private static ArrayList createListOfNonFE(ArrayList<Integer> absences, int fe)
     {
         ArrayList<Integer> nonFEAbsences = new ArrayList<>();
