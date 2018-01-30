@@ -93,13 +93,22 @@ public class Main {
         names.add("Tammy");
         System.out.println("\nNames: " + names);
 
+        // Shuffle the names using a user-defined shuffle
+        strShuffle(names);
+        System.out.println("Shuffled names: " + names);
+
     }
 
-    private static void mySwitch(ArrayList<Integer> absences, int num1, int num2)
+    private static void strShuffle(ArrayList<String> names)
     {
-        int temp = absences.get(num1);
-        absences.set(num1,absences.get(num2));
-        absences.set(num2,temp);
+        Random rand = new Random();
+        for (int i = 0; i < names.size(); i++)
+        {
+            int index = rand.nextInt(names.size()-1);
+            String temp = names.get(i);
+            names.set(i,names.get(index));
+            names.set(index,temp);
+        }
     }
 
     private static void shuffle(ArrayList<Integer> absences)
