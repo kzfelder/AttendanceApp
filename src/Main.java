@@ -59,6 +59,7 @@ public class Main {
         int meetFrequency = sc.nextInt();
         int fe = meetFrequency * 2;
         ArrayList listOfFE = findIndexesOfFE(absences, fe);
+
         // Find the percentage of students that FE'd
         double FEPercentage = percentage(listOfFE.size(), absences.size());
         System.out.println("The indexes of students that FE'd: " + listOfFE);
@@ -78,6 +79,29 @@ public class Main {
         Collections.sort(absences);
         System.out.println("\nSorted absences: " + absences);
 
+        // Shuffle absences with a user-defined shuffle
+        shuffle(absences);
+        System.out.println("\nShuffled absences: " + absences);
+
+    }
+
+    private static void mySwitch(ArrayList<Integer> absences, int num1, int num2)
+    {
+        int temp = absences.get(num1);
+        absences.set(num1,absences.get(num2));
+        absences.set(num2,temp);
+    }
+
+    private static void shuffle(ArrayList<Integer> absences)
+    {
+        Random rand = new Random();
+        for (int i = 0; i < absences.size(); i++)
+        {
+            int index = rand.nextInt(absences.size()-1);
+            int temp = absences.get(i);
+            absences.set(i,absences.get(index));
+            absences.set(index,temp);
+        }
     }
 
     // Function to change the values (add or subtract in a list up to 15 or down to 0)
