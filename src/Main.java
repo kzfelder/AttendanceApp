@@ -97,6 +97,21 @@ public class Main {
         strShuffle(names);
         System.out.println("Shuffled names: " + names);
 
+        // Using the 5 names, create another list that has the same size as the absences list
+        ArrayList<String> newNames = lengthenList(absences.size(), names);
+        System.out.println("New name list: " + newNames);
+
+    }
+
+    private static ArrayList<String> lengthenList(int size, ArrayList<String> names)
+    {
+        ArrayList<String> newNames = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < size; i++)
+        {
+            newNames.add(names.get(rand.nextInt(names.size()-1)));
+        }
+        return newNames;
     }
 
     private static void strShuffle(ArrayList<String> names)
