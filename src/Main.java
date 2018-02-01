@@ -86,11 +86,11 @@ public class Main {
 
         // Create and output an ArrayList of 5 distinct names.
         ArrayList<String> names = new ArrayList<>();
-        names.add("John");
-        names.add("Ralph");
-        names.add("Sam");
-        names.add("Hope");
-        names.add("Tammy");
+        names.add("Joe");
+        names.add("Peggie");
+        names.add("Kyazia");
+        names.add("Kyrah");
+        names.add("Khalil");
         System.out.println("\nNames: " + names);
 
         // Shuffle the names using a user-defined shuffle
@@ -101,6 +101,31 @@ public class Main {
         ArrayList<String> newNames = lengthenList(absences.size(), names);
         System.out.println("New name list: " + newNames);
 
+        // Check if all  5 names were used at least once [JK NEED TO USE A MAP]
+        if(checkUsage(newNames) == true)
+        {
+            System.out.println("All names were used at least once.");
+        }
+        else
+        {
+            System.out.println("All names weren't used at least once.");
+        }
+
+    }
+
+    private static Boolean checkUsage(ArrayList<String>newNames)
+    {
+        for (int i = 0; i < newNames.size(); i++)
+        {
+            for (int j = 0; j < newNames.size(); j++)
+            {
+                if(!(newNames.get(i).equals(newNames.get(j))))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private static ArrayList<String> lengthenList(int size, ArrayList<String> names)
@@ -109,7 +134,7 @@ public class Main {
         Random rand = new Random();
         for (int i = 0; i < size; i++)
         {
-            newNames.add(names.get(rand.nextInt(names.size()-1)));
+            newNames.add(names.get(rand.nextInt(names.size())));
         }
         return newNames;
     }
@@ -119,7 +144,7 @@ public class Main {
         Random rand = new Random();
         for (int i = 0; i < names.size(); i++)
         {
-            int index = rand.nextInt(names.size()-1);
+            int index = rand.nextInt(names.size());
             String temp = names.get(i);
             names.set(i,names.get(index));
             names.set(index,temp);
@@ -131,7 +156,7 @@ public class Main {
         Random rand = new Random();
         for (int i = 0; i < absences.size(); i++)
         {
-            int index = rand.nextInt(absences.size()-1);
+            int index = rand.nextInt(absences.size());
             int temp = absences.get(i);
             absences.set(i,absences.get(index));
             absences.set(index,temp);
