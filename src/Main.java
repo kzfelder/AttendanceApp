@@ -101,8 +101,8 @@ public class Main {
         ArrayList<String> newNames = lengthenList(absences.size(), names);
         System.out.println("New name list: " + newNames);
 
-        // Check if all  5 names were used at least once [JK NEED TO USE A MAP]
-        if(checkUsage(newNames) == true)
+        // Check if all  5 names were used at least once
+        if(checkUsage(names, newNames) == true)
         {
             System.out.println("All names were used at least once.");
         }
@@ -113,19 +113,29 @@ public class Main {
 
     }
 
-    private static Boolean checkUsage(ArrayList<String>newNames)
+    private static Boolean checkUsage(ArrayList<String>names, ArrayList<String>newNames)
     {
-        for (int i = 0; i < newNames.size(); i++)
+        ArrayList<Integer>seenNames = new ArrayList<>();
+        for (int i = 0; i < names.size(); i++)
         {
+            int count = 0;
             for (int j = 0; j < newNames.size(); j++)
             {
-                if(!(newNames.get(i).equals(newNames.get(j))))
+                if(names.get(i).equals(newNames.get(j)))
                 {
-                    return false;
+                    count++;
                 }
             }
+            seenNames.add(count);
         }
-        return true;
+        if(seenNames.contains(0))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     private static ArrayList<String> lengthenList(int size, ArrayList<String> names)
@@ -267,8 +277,4 @@ public class Main {
         }
         return indexes;
     }
-
-
-
-
 }
