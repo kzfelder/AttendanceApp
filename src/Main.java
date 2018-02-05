@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -115,27 +112,18 @@ public class Main {
 
     private static Boolean checkUsage(ArrayList<String>names, ArrayList<String>newNames)
     {
-        ArrayList<Integer>seenNames = new ArrayList<>();
+        Set<String> seen = new HashSet<>();
         for (int i = 0; i < names.size(); i++)
         {
-            int count = 0;
             for (int j = 0; j < newNames.size(); j++)
             {
                 if(names.get(i).equals(newNames.get(j)))
                 {
-                    count++;
+                    seen.add(names.get(i));
                 }
             }
-            seenNames.add(count);
         }
-        if(seenNames.contains(0))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return seen.size() == names.size();
     }
 
     private static ArrayList<String> lengthenList(int size, ArrayList<String> names)
