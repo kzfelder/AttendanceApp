@@ -76,9 +76,19 @@ public class Main {
         Collections.sort(absences);
         System.out.println("Sorted absences: " + absences);
 
+        // Shuffle absences with a library function
+        Collections.shuffle(absences);
+        System.out.println("Shuffled absences: " + absences);
+
+        // Find how many of each absence value there is
+
+        // Sort absences with a user-defined sort
+        sort(absences);
+        System.out.println("\nUser sorted absences: " + absences);
+
         // Shuffle absences with a user-defined shuffle
         shuffle(absences);
-        System.out.println("Shuffled absences: " + absences);
+        System.out.println("User shuffled absences: " + absences);
 
 
         // Create and output an ArrayList of 5 distinct names.
@@ -108,6 +118,22 @@ public class Main {
             System.out.println("All names weren't used at least once.");
         }
 
+    }
+
+    private static void sort(ArrayList<Integer> absences)
+    {
+        for (int i = 0; i < absences.size(); i++)
+        {
+            for (int j = 0; j < absences.size(); j++)
+            {
+                if(absences.get(i) < absences.get(j))
+                {
+                    int temp = absences.get(i);
+                    absences.set(i,absences.get(j));
+                    absences.set(j,temp);
+                }
+            }
+        }
     }
 
     private static Boolean checkUsage(ArrayList<String>names, ArrayList<String>newNames)
