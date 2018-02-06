@@ -12,6 +12,7 @@ public class Main {
         String name = sc.nextLine();
         System.out.println("Welcome, " + name + "!");
 
+
         // Create and output list of absences
         ArrayList<Integer> absences = new ArrayList<>();
         Random rand = new Random();
@@ -44,11 +45,13 @@ public class Main {
         double percentage = percentage(countPerf, threeOrLess);
         System.out.println("Percentage of students with less than 3 absences that have perfect attendance: " + percentage + "%");
 
+
         // Find the index(es) of the students who had a specified number of absences
         System.out.print("\nEnter a number to find the indexes of students with that amount of absences: ");
         int num = sc.nextInt();
         ArrayList ind = findIndexes(absences, num);
         System.out.println("The indexes of students with " + num + " absences are: " + ind);
+
 
         // Find the index(es) of the student(s) that FE'd the course
         System.out.print("\nHow many times does this course meet a week? ");
@@ -67,6 +70,7 @@ public class Main {
         ArrayList<Integer> nonFE = createListOfNonFE(absences, fe);
         System.out.println("\nThe average of non-FE'd absences: " + average(nonFE));
 
+
         // Change absences in a ArrayList
         // Which variables to use for this function? (x & y)
         changeListValues(absences, 7,5);
@@ -80,7 +84,11 @@ public class Main {
         Collections.shuffle(absences);
         System.out.println("Shuffled absences: " + absences);
 
-        // Find how many of each absence value there is
+
+        // Find the amount of unique absences
+        int numUniques = findUniques(absences);
+        System.out.println("\nNumber of unique absences: " + numUniques);
+
 
         // Sort absences with a user-defined sort
         sort(absences);
@@ -118,6 +126,27 @@ public class Main {
             System.out.println("All names weren't used at least once.");
         }
 
+    }
+
+    private static int findUniques(ArrayList<Integer> absences)
+    {
+        int numUniques = 0;
+        for (int i = 0; i < absences.size(); i++)
+        {
+            int count = 0;
+            for (int j = 0; j < absences.size(); j++)
+            {
+                if(absences.get(i) == absences.get(j))
+                {
+                    count++;
+                }
+            }
+            if(count == 1)
+            {
+                numUniques++;
+            }
+        }
+        return numUniques;
     }
 
     private static void sort(ArrayList<Integer> absences)
