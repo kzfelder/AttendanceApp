@@ -82,8 +82,29 @@ public class Main {
 
         // Shuffle absences with a library function
         Collections.shuffle(absences);
-        System.out.println("Shuffled absences: " + absences);
+        System.out.println("Shuffled absences: " + absences + "\n");
 
+        //  Find how many of each absences
+        // 1. Create Sorted
+        ArrayList<Integer> duplicateAbs = absences;
+        Collections.sort(duplicateAbs);
+
+        // 2. Count amount & add to map
+        Map<Integer, Integer> absenceFrequency = new HashMap<>();
+        for (int i = 0; i < duplicateAbs.size(); i++)
+        {
+            int frq = countFrequency(duplicateAbs.get(i), duplicateAbs);
+            absenceFrequency.putIfAbsent(duplicateAbs.get(i), frq);
+        }
+        // 3. Obtain val & print amount of *'s w/ key
+        for (Map.Entry<Integer,Integer> entry: absenceFrequency.entrySet())
+        {
+            int key = entry.getKey();
+            int val = entry.getValue();
+            String stars = createStars(val);
+            System.out.println(key + " " + stars);
+        }
+        
 
         // Find the amount of unique absences
         int numUniques = findUniques(absences);
@@ -127,6 +148,32 @@ public class Main {
         }
 
     }
+
+
+    public static int countFrequency(int num, ArrayList<Integer> absences)
+    {
+        int count = 0;
+        for (int i = 0; i < absences.size(); i++)
+        {
+            if (absences.get(i) == num) 
+            { 
+                count++; 
+            }
+
+        }
+        return count;
+    }
+    
+    private static String createStars(int num)
+    {
+        String stars = "";
+        for (int j = 0; j < num; j++)
+        {
+            stars += "*";
+        }
+        return stars;
+    }
+
 
     private static int findUniques(ArrayList<Integer> absences)
     {
