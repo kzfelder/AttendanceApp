@@ -173,14 +173,31 @@ public class Main {
         // 3. Output results
         System.out.println("Students who FE'd some course: " + feACourseNames);
 
-        // TODO How many courses does [name] have?
+        // How many courses does [name] have?
+        System.out.print("\nEnter name of student: ");
+        String student = sc.next();
+
+        System.out.println("Number of courses " + student + " has: " + findNameIndexes(newNames, student).size());
 
         // TODO Which courses did [name] FE?
 
     }
 
+    private static ArrayList<Integer> findNameIndexes(ArrayList<String> newNames, String student)
+    {
+        ArrayList<Integer>indexes = new ArrayList<>();
+        for (int i = 0; i < newNames.size(); i++)
+        {
+            if(newNames.get(i).toLowerCase().equals(student.toLowerCase()))
+            {
+                indexes.add(i);
+            }
+        }
+        return indexes;
+    }
 
-    public static int countFrequency(int num, ArrayList<Integer> absences)
+
+    private static int countFrequency(int num, ArrayList<Integer> absences)
     {
         int count = 0;
         for (int i = 0; i < absences.size(); i++)
