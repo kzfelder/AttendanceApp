@@ -147,6 +147,7 @@ public class Main {
             System.out.println("All names weren't used at least once.");
         }
 
+
         // What are the names of the students with perfect attendance?
         // 1. Get indexes of those with perfect attendance
         ArrayList<Integer> perfAttenIndexes = findIndexes(absences, 0);
@@ -160,7 +161,17 @@ public class Main {
         // 3. Output results
         System.out.println("\nStudents with perfect attendance: " + perfAttenNames);
 
-        // TODO What are the names of the students who have FE'd some course?
+        // What are the names of the students who have FE'd some course?
+        ArrayList<Integer> feACourseIndexes = findIndexesOfFE(absences, fe);
+        // 2. Add the names with perfect attendance to a new list using the previous indexes and newName list
+        ArrayList<String> feACourseNames = new ArrayList<>();
+        for (int index : feACourseIndexes)
+        {
+            String feName = newNames.get(index);
+            feACourseNames.add(feName);
+        }
+        // 3. Output results
+        System.out.println("Students who FE'd some course: " + feACourseNames);
 
         // TODO How many courses does [name] have?
 
