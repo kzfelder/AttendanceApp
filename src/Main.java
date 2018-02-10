@@ -104,7 +104,7 @@ public class Main {
             String stars = createStars(val);
             System.out.println(key + " " + stars);
         }
-        
+
 
         // Find the amount of unique absences
         int numUniques = findUniques(absences);
@@ -146,6 +146,25 @@ public class Main {
         {
             System.out.println("All names weren't used at least once.");
         }
+
+        // What are the names of the students with perfect attendance?
+        // 1. Get indexes of those with perfect attendance
+        ArrayList<Integer> perfAttenIndexes = findIndexes(absences, 0);
+        // 2. Add the names with perfect attendance to a new list using the previous indexes and newName list
+        ArrayList<String> perfAttenNames = new ArrayList<>();
+        for (int index : perfAttenIndexes)
+        {
+            String perfName = newNames.get(index);
+            perfAttenNames.add(perfName);
+        }
+        // 3. Output results
+        System.out.println("\nStudents with perfect attendance: " + perfAttenNames);
+
+        // TODO What are the names of the students who have FE'd some course?
+
+        // TODO How many courses does [name] have?
+
+        // TODO Which courses did [name] FE?
 
     }
 
