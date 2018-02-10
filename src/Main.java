@@ -179,7 +179,16 @@ public class Main {
 
         System.out.println("Number of courses " + student + " has: " + findNameIndexes(newNames, student).size());
 
-        // TODO Which courses did [name] FE?
+        // Which courses did [name] FE?
+        ArrayList<Integer> coursesStudentFE = new ArrayList<>();
+        for ( int index : feACourseIndexes)
+        {
+            if (newNames.get(index).toLowerCase().equals(student.toLowerCase()))
+            {
+                coursesStudentFE.add(index);
+            }
+        }
+        System.out.println("Courses " + student + " FE'd: " + coursesStudentFE);
 
     }
 
