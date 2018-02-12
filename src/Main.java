@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
@@ -190,6 +191,40 @@ public class Main {
         }
         System.out.println("Courses " + student + " FE'd: " + coursesStudentFE);
 
+
+        // Generate today's date and output it
+        LocalDate today = LocalDate.now();
+        System.out.println("\nToday's date: " + today);
+
+        // TODO How many days have you been alive?  Use date1.equals(date2) to check your result
+        LocalDate birthDate = LocalDate.of(1998,12,23);
+        long totalDays = daysAlive(today, birthDate);
+        System.out.println("Days alive: " + totalDays);
+        
+        // TODO Create a list of LocalDate objects
+
+
+        // TODO What are the names of the students with the fewest absences?
+
+
+        // TODO What are the names of students who have the longest number of days since an absence?
+
+
+        // TODO What is the range of absence dates?
+
+
+        // TODO What are the indexes of the students who have [X] absence date?
+
+
+        // TODO What are the indexes of the students who have the same absence date?
+    }
+
+    private static long daysAlive(LocalDate today, LocalDate birthDate)
+    {
+        long daysFromToday = today.toEpochDay();
+        long daysFromBirth = birthDate.toEpochDay();
+        long days = daysFromToday - daysFromBirth;
+        return days;
     }
 
     private static ArrayList<Integer> findNameIndexes(ArrayList<String> newNames, String student)
