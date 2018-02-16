@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 public class Main {
@@ -196,13 +197,16 @@ public class Main {
         LocalDate today = LocalDate.now();
         System.out.println("\nToday's date: " + today);
 
-        // TODO How many days have you been alive?  Use date1.equals(date2) to check your result
+        // How many days have you been alive?  Use date1.equals(date2) to check your result
         LocalDate birthDate = LocalDate.of(1998,12,23);
         long totalDays = daysAlive(today, birthDate);
         System.out.println("Days alive: " + totalDays);
+        Boolean check = checkDays(totalDays, today, birthDate);
+        System.out.println("Correct amount of days: " + check);
         
         // TODO Create a list of LocalDate objects
-
+        ArrayList<LocalDate> dates = new ArrayList<>();
+        System.out.println("test: " + today.minus(Period.ofDays(20)));
 
         // TODO What are the names of the students with the fewest absences?
 
@@ -217,6 +221,19 @@ public class Main {
 
 
         // TODO What are the indexes of the students who have the same absence date?
+    }
+
+    /*private static ArrayList<LocalDate> getRandomDates(LocalDate today, ArrayList<LocalDate> dates, ArrayList<String> newNames)
+    {
+        for (int i = 0; i < newNames.size(); i++)
+        {
+
+        }
+    }*/
+
+    private static Boolean checkDays(long totalDays, LocalDate today, LocalDate birthDate)
+    {
+        return today.equals(birthDate.plusDays(totalDays));
     }
 
     private static long daysAlive(LocalDate today, LocalDate birthDate)
