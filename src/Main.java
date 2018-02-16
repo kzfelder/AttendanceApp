@@ -208,8 +208,9 @@ public class Main {
         ArrayList<LocalDate> dates = new ArrayList<>();
         System.out.println("test: " + today.minus(Period.ofDays(20)));
 
-        // TODO What are the names of the students with the fewest absences?
-
+        // What are the names of the students with the fewest absences?
+        ArrayList<String> fewestAbsences = findNamesWithMin(absences, newNames);
+        System.out.println("Students with fewest absences: " + fewestAbsences);
 
         // TODO What are the names of students who have the longest number of days since an absence?
 
@@ -221,6 +222,20 @@ public class Main {
 
 
         // TODO What are the indexes of the students who have the same absence date?
+    }
+
+    private static ArrayList<String> findNamesWithMin(ArrayList<Integer> absences, ArrayList<String> newNames)
+    {
+        ArrayList<String> namesWithMin = new ArrayList<>();
+        int min = Collections.min(absences);
+        for (int i = 0; i < absences.size(); i++)
+        {
+            if (absences.get(i).equals(min))
+            {
+                namesWithMin.add(newNames.get(i));
+            }
+        }
+        return namesWithMin;
     }
 
     /*private static ArrayList<LocalDate> getRandomDates(LocalDate today, ArrayList<LocalDate> dates, ArrayList<String> newNames)
