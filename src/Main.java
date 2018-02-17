@@ -204,13 +204,13 @@ public class Main {
         Boolean check = checkDays(totalDays, today, birthDate);
         System.out.println("Correct amount of days: " + check);
         
-        // TODO Create a list of LocalDate objects
-        ArrayList<LocalDate> dates = new ArrayList<>();
-        System.out.println("test: " + today.minus(Period.ofDays(20)));
+        // Create a list of LocalDate objects
+        ArrayList<LocalDate> dates = generateDates(newNames, today);
+        System.out.println("\nDates: " + dates);
 
         // What are the names of the students with the fewest absences?
         ArrayList<String> fewestAbsences = findNamesWithMin(absences, newNames);
-        System.out.println("Students with fewest absences: " + fewestAbsences);
+        System.out.println("\nStudents with fewest absences: " + fewestAbsences);
 
         // TODO What are the names of students who have the longest number of days since an absence?
 
@@ -222,6 +222,17 @@ public class Main {
 
 
         // TODO What are the indexes of the students who have the same absence date?
+    }
+
+    private static ArrayList<LocalDate> generateDates(ArrayList<String> newNames, LocalDate today)
+    {
+        ArrayList<LocalDate> dates = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < newNames.size(); i++)
+        {
+            dates.add(today.minusDays(rand.nextInt(21)));
+        }
+        return dates;
     }
 
     private static ArrayList<String> findNamesWithMin(ArrayList<Integer> absences, ArrayList<String> newNames)
