@@ -215,13 +215,23 @@ public class Main {
         // TODO What are the names of students who have the longest number of days since an absence?
 
 
-        // TODO What is the range of absence dates?
-
+        // What is the range of absence dates?
+        System.out.println("\nRange(in days): " + findRangeOfDates(dates, today));
 
         // TODO What are the indexes of the students who have [X] absence date?
 
 
         // TODO What are the indexes of the students who have the same absence date?
+    }
+
+    private static int findRangeOfDates(ArrayList<LocalDate> dates, LocalDate today)
+    {
+        ArrayList<Integer> ranges = new ArrayList<>();
+        for (int i = 0; i < dates.size(); i++)
+        {
+            ranges.add(today.compareTo(dates.get(i)));
+        }
+        return (Collections.max(ranges) - Collections.min(ranges));
     }
 
     private static ArrayList<LocalDate> generateDates(ArrayList<String> newNames, LocalDate today)
