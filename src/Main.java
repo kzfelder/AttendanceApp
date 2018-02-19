@@ -220,8 +220,11 @@ public class Main {
         // What is the range of absence dates?
         System.out.println("\nRange(in days): " + findRangeOfDates(dates, today));
 
-        // TODO What are the indexes of the students who have [X] absence date?
-
+        // What are the indexes of the students who have [X] absence date?
+        LocalDate absenceDate = LocalDate.of(2018,02,19);
+        ArrayList<Integer> indexesAtDate =  findIndexesOfDate(dates, absenceDate);
+        System.out.println("Indexes of students with " + absenceDate + " absence date: " + indexesAtDate);
+        
 
         // TODO What are the indexes of the students who have the same absence date?
     }
