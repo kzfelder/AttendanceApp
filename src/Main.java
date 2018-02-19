@@ -10,8 +10,8 @@ public class Main {
 
         // Welcome the user
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter your name: ");
-        String name = sc.nextLine();
+        System.out.println("Enter your name: kswagthagoat");
+        String name = "kswagthagoat";
         System.out.println("Welcome, " + name + "!");
 
 
@@ -49,16 +49,16 @@ public class Main {
 
 
         // Find the index(es) of the students who had a specified number of absences
-        System.out.print("\nEnter a number to find the indexes of students with that amount of absences: ");
-        int num = sc.nextInt();
+        System.out.println("\nEnter a number to find the indexes of students with that amount of absences: 2");
+        int num = 3;
         ArrayList ind = findIndexes(absences, num);
         System.out.println("The indexes of students with " + num + " absences are: " + ind);
 
 
         // Find the index(es) of the student(s) that FE'd the course
-        System.out.print("\nHow many times does this course meet a week? ");
+        System.out.println("\nHow many times does this course meet a week? 3");
         // I know the variable has a bad name... need help
-        int meetFrequency = sc.nextInt();
+        int meetFrequency = 3;
         int fe = meetFrequency * 2;
         ArrayList listOfFE = findIndexesOfFE(absences, fe);
 
@@ -176,8 +176,8 @@ public class Main {
         System.out.println("Students who FE'd some course: " + feACourseNames);
 
         // How many courses does [name] have?
-        System.out.print("\nEnter name of student: ");
-        String student = sc.next();
+        System.out.println("\nEnter name of student: kyrah");
+        String student = "kyrah";
 
         System.out.println("Number of courses " + student + " has: " + findNameIndexes(newNames, student).size());
 
@@ -212,8 +212,10 @@ public class Main {
         ArrayList<String> fewestAbsences = findNamesWithMin(absences, newNames);
         System.out.println("\nStudents with fewest absences: " + fewestAbsences);
 
-        // TODO What are the names of students who have the longest number of days since an absence?
-
+        // What are the names of students who have the longest number of days since an absence?
+        LocalDate furthestDate = findFurthestDateFrom(dates, today);
+        ArrayList<Integer> indexesWithFurthestDate = findIndexesOfDate(dates, furthestDate);
+        System.out.println("Longest days since absence: " + findNamesAtIndexes(newNames, indexesWithFurthestDate));
 
         // What is the range of absence dates?
         System.out.println("\nRange(in days): " + findRangeOfDates(dates, today));
@@ -222,6 +224,42 @@ public class Main {
 
 
         // TODO What are the indexes of the students who have the same absence date?
+    }
+
+    private static ArrayList<String> findNamesAtIndexes(ArrayList<String> newNames, ArrayList<Integer> indexesWithFurthestDate)
+    {
+        ArrayList<String> namesAtIndexes = new ArrayList<>();
+        for (int index : indexesWithFurthestDate)
+        {
+            namesAtIndexes.add(newNames.get(index));
+        }
+        return  namesAtIndexes;
+    }
+
+    private static ArrayList<Integer> findIndexesOfDate(ArrayList<LocalDate> dates, LocalDate furthestDate)
+    {
+        ArrayList<Integer> dateIndexes = new ArrayList<>();
+        for (int i = 0; i < dates.size(); i++)
+        {
+            if(dates.get(i).equals(furthestDate))
+            {
+                dateIndexes.add(i);
+            }
+        }
+        return dateIndexes;
+    }
+
+    private static LocalDate findFurthestDateFrom(ArrayList<LocalDate> dates, LocalDate today)
+    {
+        LocalDate furthestDate = today;
+        for (LocalDate date : dates)
+        {
+            if(furthestDate.isAfter(date))
+            {
+                furthestDate = date;
+            }
+        }
+        return furthestDate;
     }
 
     private static int findRangeOfDates(ArrayList<LocalDate> dates, LocalDate today)
@@ -259,13 +297,6 @@ public class Main {
         return namesWithMin;
     }
 
-    /*private static ArrayList<LocalDate> getRandomDates(LocalDate today, ArrayList<LocalDate> dates, ArrayList<String> newNames)
-    {
-        for (int i = 0; i < newNames.size(); i++)
-        {
-
-        }
-    }*/
 
     private static Boolean checkDays(long totalDays, LocalDate today, LocalDate birthDate)
     {
