@@ -226,7 +226,19 @@ public class Main {
         System.out.println("Indexes of students with " + absenceDate + " absence date: " + indexesAtDate);
         
 
-        // TODO What are the indexes of the students who have the same absence date?
+        // What are the indexes of the students who have the same absence date?
+        System.out.println("Indexes with same date: " + getDatesAndIndexes(dates));
+    }
+
+    private static Map<LocalDate, ArrayList<Integer>> getDatesAndIndexes(ArrayList<LocalDate> dates)
+    {
+        Map<LocalDate, ArrayList<Integer>> studentsWithDate = new HashMap<>();
+        for (int i = 0; i < dates.size(); i++)
+        {
+            ArrayList<Integer> dateIndexes = findIndexesOfDate(dates, dates.get(i));
+            studentsWithDate.putIfAbsent(dates.get(i), dateIndexes);
+        }
+        return studentsWithDate;
     }
 
     private static ArrayList<String> findNamesAtIndexes(ArrayList<String> newNames, ArrayList<Integer> indexesWithFurthestDate)
