@@ -206,28 +206,119 @@ public class Main {
         
         // Create a list of LocalDate objects
         ArrayList<LocalDate> dates = generateDates(newNames, today);
-        System.out.println("\nDates: " + dates);
+        System.out.println("\nDates: " + dates + "\nNames: " + newNames);
 
         // What are the names of the students with the fewest absences?
         ArrayList<String> fewestAbsences = findNamesWithMin(absences, newNames);
         System.out.println("\nStudents with fewest absences: " + fewestAbsences);
 
         // What are the names of students who have the longest number of days since an absence?
+        // Solution #1: Finds furthest date in the list
         LocalDate furthestDate = findFurthestDateFrom(dates, today);
         ArrayList<Integer> indexesWithFurthestDate = findIndexesOfDate(dates, furthestDate);
         System.out.println("Longest days since absence: " + findNamesAtIndexes(newNames, indexesWithFurthestDate));
+        
+        // Solution #2: Finds by longest number of days since last absence
+        Map<String, ArrayList<LocalDate>> mapOfNamesAndDates = getNamesAndDates(newNames, dates);
+        Map<String, LocalDate>recentStudentDates = getAllRecentStudentDates(mapOfNamesAndDates, dates, today);
+        LocalDate furthestDateFromRecents = findFurthestDateFromWithMap(recentStudentDates, today);
+        System.out.println("Longest days since last absence: " + findStudentsWithDateInMap(recentStudentDates, furthestDateFromRecents));
+
 
         // What is the range of absence dates?
         System.out.println("\nRange(in days): " + findRangeOfDates(dates, today));
 
         // What are the indexes of the students who have [X] absence date?
-        LocalDate absenceDate = LocalDate.of(2018,02,19);
+        LocalDate absenceDate = today; // or can enter own date here using LocalDate.of()
         ArrayList<Integer> indexesAtDate =  findIndexesOfDate(dates, absenceDate);
         System.out.println("Indexes of students with " + absenceDate + " absence date: " + indexesAtDate);
         
 
         // What are the indexes of the students who have the same absence date?
         System.out.println("Indexes with same date: " + getDatesAndIndexes(dates));
+    }
+
+    private static ArrayList<String> findStudentsWithDateInMap(Map<String, LocalDate> recentStudentDates, LocalDate furthestDateFromRecents)
+    {
+        ArrayList<String>studentsWithDate = new ArrayList<>();
+        for(Map.Entry<String, LocalDate> entry : recentStudentDates.entrySet())
+        {
+            String key = entry.getKey();
+            LocalDate val = entry.getValue();
+            if(val.equals(furthestDateFromRecents))
+            {
+                studentsWithDate.add(key);
+            }
+        }
+        return studentsWithDate;
+    }
+
+    private static LocalDate findFurthestDateFromWithMap(Map<String, LocalDate>datesAndNames, LocalDate today)
+    {
+        LocalDate furthestDate = today;
+        for (Map.Entry<String, LocalDate> entry : datesAndNames.entrySet())
+        {
+            LocalDate val = entry.getValue();
+            if(furthestDate.isAfter(val))
+            {
+                furthestDate = val;
+            }
+        }
+        return furthestDate;
+    }
+
+    private static ArrayList<String> findStudentsWithDate(ArrayList<LocalDate> dates, ArrayList<String> names, LocalDate date)
+    {
+        ArrayList<Integer> dateIndexes = findIndexesOfDate(dates, date);
+        ArrayList<String> namesAtIndexes = findNamesAtIndexes(names, dateIndexes);
+        return namesAtIndexes;
+    }
+
+    private static Map<String, LocalDate>getAllRecentStudentDates(Map<String, ArrayList<LocalDate>> mapOfNamesAndDates, ArrayList<LocalDate>dates, LocalDate today)
+    {
+        Map<String, LocalDate> recentDates = new HashMap<>();
+        for(Map.Entry<String,ArrayList<LocalDate>> entry: mapOfNamesAndDates.entrySet())
+        {
+            String key = entry.getKey();
+            ArrayList<LocalDate> val = entry.getValue();
+            recentDates.putIfAbsent(key, getMostRecentDate(val, today));
+        }
+        return recentDates;
+    }
+
+    private static LocalDate getMostRecentDate(ArrayList<LocalDate>dates, LocalDate today)
+    {
+        LocalDate recentDate = dates.get(0);
+        for(LocalDate date : dates)
+        {
+            if(today.compareTo(date) < today.compareTo(recentDate))
+            {
+                recentDate = date;
+            }
+        }
+        return recentDate;
+    }
+
+    private static ArrayList<LocalDate> findDatesAtIndexes(ArrayList<LocalDate> dates, ArrayList<Integer> indexes)
+    {
+        ArrayList<LocalDate> datesAtIndexes = new ArrayList<>();
+        for(int index : indexes)
+        {
+            datesAtIndexes.add(dates.get(index));
+        }
+        return datesAtIndexes;
+    }
+
+    private static Map<String, ArrayList<LocalDate>> getNamesAndDates(ArrayList<String> names, ArrayList<LocalDate> dates)
+    {
+        Map<String, ArrayList<LocalDate>> studentDates = new HashMap<>();
+        for (int i = 0; i < names.size(); i++)
+        {
+            ArrayList<Integer> nameIndexes = findNameIndexes(names, names.get(i));
+            ArrayList<LocalDate>datesFromIndexes = findDatesAtIndexes(dates, nameIndexes);
+            studentDates.putIfAbsent(names.get(i), datesFromIndexes);
+        }
+        return studentDates;
     }
 
     private static Map<LocalDate, ArrayList<Integer>> getDatesAndIndexes(ArrayList<LocalDate> dates)
@@ -241,10 +332,10 @@ public class Main {
         return studentsWithDate;
     }
 
-    private static ArrayList<String> findNamesAtIndexes(ArrayList<String> newNames, ArrayList<Integer> indexesWithFurthestDate)
+    private static ArrayList<String> findNamesAtIndexes(ArrayList<String> newNames, ArrayList<Integer> indexes)
     {
         ArrayList<String> namesAtIndexes = new ArrayList<>();
-        for (int index : indexesWithFurthestDate)
+        for (int index : indexes)
         {
             namesAtIndexes.add(newNames.get(index));
         }
